@@ -1,0 +1,9 @@
+.table {
+  width: 100%;
+  word-wrap: break-word;
+}
+/* table,
+td,
+th {
+  border-collapse: collapse;
+} */

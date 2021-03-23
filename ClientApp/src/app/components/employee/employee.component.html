@@ -1,0 +1,33 @@
+<p>
+  <a [routerLink]="['/employee/new']" class="btn btn-primary">New Employee</a>
+</p>
+
+<table class="table" style="padding: 10px">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Date Of Birth</th>
+      <th style="width: 30px">Skills</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of employees">
+      <td>
+        <a [routerLink]="['/employee/edit/', emp.id]">edit</a>
+      </td>
+      <td>{{ emp.id }}</td>
+      <td>{{ emp.name }}</td>
+      <td>{{ emp.country.name }}</td>
+      <td>{{ emp.city.name }}</td>
+      <td>{{ emp.dateOfBirth }}</td>
+      <td *ngFor="let skill of emp.skills">
+        {{ skill.name }}
+      </td>
+    </tr>
+  </tbody>
+</table>

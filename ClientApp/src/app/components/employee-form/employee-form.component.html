@@ -1,0 +1,112 @@
+<h1>Employee Form</h1>
+<!-- <p>{{ employee | json }}</p> -->
+<div class="employee-form">
+  <form (ngSubmit)="submit()" #f="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        [(ngModel)]="employee.name"
+        name="name"
+        #name="ngModel"
+        required
+      />
+      <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
+        Please specify the Country.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="country">Country</label>
+      <select
+        id="country"
+        class="form-control"
+        (change)="onCountryChange()"
+        [(ngModel)]="employee.countryId"
+        name="countryId"
+        #country="ngModel"
+        required
+      >
+        <option value="">Select a Country</option>
+        <option *ngFor="let m of countries" value="{{ m.id }}">
+          {{ m.name }}
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf="country.touched && !country.valid">
+        Please specify the Country.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="city">city</label>
+      <select
+        id="cityId"
+        class="form-control"
+        [(ngModel)]="employee.cityId"
+        name="cityId"
+        #cityId="ngModel"
+        required
+      >
+        <option value="">Select a City</option>
+        <option *ngFor="let m of cities" value="{{ m.id }}">
+          {{ m.name }}
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf="cityId.touched && !cityId.valid">
+        Please specify the City.
+      </div>
+    </div>
+
+    <h2>Skills</h2>
+    <ng-container *ngFor="let f of skillsObject" class="checkbox">
+      <label for="skill{{ f.id }}" class="checkbox-inline label">
+        <input
+          type="checkbox"
+          id="skill{{ f.id }}"
+          (change)="onSkillToggle(f.id, $event)"
+          [checked]="employee.skills.includes(f.id)"
+        />
+        {{ f.languageSkill }}
+      </label>
+    </ng-container>
+    <h2>Date Of Birth</h2>
+    <div class="form-group">
+      <label for="dateof birth">
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            [(ngModel)]="model"
+            ngbDatepicker
+            [maxDate]="{ year: 2020, month: 12, day: 31 }"
+            [markDisabled]="isDisabled"
+            #d="ngbDatepicker"
+            required
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary calendar"
+              (click)="d.toggle()"
+              type="button"
+            ></button>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    <div>
+      <input type="file" (change)="uploadPhoto()" #fileInput />
+    </div>
+
+    {{ filename?.name }}
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      style="width: 150px; text-align: center"
+    >
+      Save
+    </button>
+  </form>
+</div>
